@@ -1,9 +1,10 @@
 
 import { compose } from "redux";
-import { Login } from "./login"
+import { Chat } from "./chat"
 import { Route, Switch, withRouter } from "react-router";
 import { connect, Provider } from "react-redux";
-import * as urljoin from "url-join";
+import urljoin from "url-join";
+import Layout from "antd/lib/layout";
 
 
 interface IProps {
@@ -16,12 +17,12 @@ export class Root extends React.Component<IProps, {}> {
         connect(),
     )(({ match }: any) => {
         return (
-            <>
+            <Layout>
                 <Switch key={2}>
                     <Route
                         exact={true}
                         path={urljoin(match.url)}
-                        component={Login}
+                        component={Chat}
                     />
                     {/* <Route
                         exact={true}
@@ -35,7 +36,7 @@ export class Root extends React.Component<IProps, {}> {
                     />
                     <Route path={urljoin(match.url)} component={App} /> */}
                 </Switch>
-            </>
+            </Layout>
         );
     });
 

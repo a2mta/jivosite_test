@@ -1,7 +1,7 @@
 import { combineReducers, ReducersMapObject } from "redux";
 // import { reducer as formReducer } from "redux-form";
 import { all } from "redux-saga/effects";
-import { uiReducer } from "./ui/reducer";
+import { messagesReducer } from "./messages/reducer";
 
 // export function* rootSaga() {
 //     yield all([languageSagas()]);
@@ -10,6 +10,6 @@ import { uiReducer } from "./ui/reducer";
 export const createRootReducer = (reducersToCombine: ReducersMapObject) =>
     combineReducers({
         // form: formReducer,
-        ui: uiReducer,
+        messages: messagesReducer,
         ...reducersToCombine,
     });

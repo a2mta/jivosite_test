@@ -52,6 +52,7 @@ let config = {
     ],
     modules: [path.resolve ('./src'), 'node_modules'],
   },
+  //   externals: [/^(?!\.|\/|\$|services).+/i],
   module: {
     rules: [
       {
@@ -137,6 +138,38 @@ let config = {
       React: 'react',
     }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 1,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
+  },
+  devServer: {
+    port: 8080,
+    host: 'localhost',
+    hot: true,
+    inline: true,
+    open: true,
+    openPage: '',
+    historyApiFallback: true,
+  },
 };
 
 module.exports = config;

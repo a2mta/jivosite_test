@@ -1,6 +1,6 @@
 
 export class Login extends React.PureComponent<{}, {}> {
-    public render(): any {
+    public render(): JSX.Element {
         return (
             <div>LOGIN</div>
         );
