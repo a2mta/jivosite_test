@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
-import { createRootReducer, } from "./root";
+import { createRootReducer, rootSaga } from "./root";
 
 
 let composeEnhancers: any;
@@ -23,7 +23,7 @@ class ReduxStoreCreatorClass {
             composeEnhancers(applyMiddleware(sagaMiddleware)),
         );
 
-        // sagaMiddleware.run(rootSaga);
+        sagaMiddleware.run(rootSaga);
         if (save) {
             this.store = store;
         }

@@ -18,23 +18,11 @@ export class Root extends React.Component<IProps, {}> {
     )(({ match }: any) => {
         return (
             <Layout>
-                <Switch key={2}>
+                <Switch >
                     <Route
-                        exact={true}
                         path={urljoin(match.url)}
                         component={Chat}
                     />
-                    {/* <Route
-                        exact={true}
-                        path={urljoin(match.url, "/password-reset")}
-                        component={ResetPasswordFormStep2Loadable}
-                    />
-                    <Route
-                        exact={true}
-                        path={urljoin(match.url, "/reset-password")}
-                        component={ResetPasswordFormStep1Loadable}
-                    />
-                    <Route path={urljoin(match.url)} component={App} /> */}
                 </Switch>
             </Layout>
         );

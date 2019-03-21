@@ -1,56 +1,48 @@
 
 import Layout from "antd/lib/layout";
-import Row from "antd/lib/row";
-import Col from "antd/lib/col";
-import { MessageInput } from "./message-input"
-import { MessagesList } from "./message-list"
-import { Rating } from "./rating"
+import { Messages } from "./messages";
+import { Rating } from "./rating";
+import {
+    Route,
+    Switch,
+    RouteComponentProps
+} from "react-router-dom";
+import urljoin from "url-join";
+import { HeaderMenu } from "../header"
 
 const { Content } = Layout;
+interface IProps extends RouteComponentProps<{}> {
+    match: any;
+}
 
-export class Chat extends React.PureComponent<{}, {}> {
+export class Chat extends React.PureComponent<IProps, {}> {
     public render(): JSX.Element {
         return (
-            <Content style={{ padding: "0 50px", marginTop: 64 }}>
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: 24,
-                        minHeight: 380,
-                    }}
-                >
-                    <Row>
-                        <Col span={16}>
-                            <MessagesList />
-                            <MessageInput />
-                        </Col>
-                        <Col span={8}><Rating /></Col>
-                    </Row>
-
-
-                    {/* <Switch>
-                        <Route
-                            exact={true}
-                            path={urljoin(this.props.match.url)}
-                            component={Home}
-                        />
-                        <Route
-                            exact={true}
-                            path={urljoin(this.props.match.url, "users")}
-                            component={Users}
-                        />
-                        <Route
-                            path={urljoin(this.props.match.url, "storages")}
-                            component={Storages}
-                        />
-                        <Route
-                            path={urljoin(this.props.match.url, "db")}
-                            component={DataBases}
-                        />
-                        <Route component={NotFoundHandler} />
-                    </Switch> */}
-                </div>
-            </Content>
+            <>
+                <HeaderMenu />
+                <Content style={{ padding: "0 50px", marginTop: 64 }}>
+                    <div
+                        style={{
+                            background: "#fff",
+                            padding: 24,
+                            minHeight: 380,
+                        }}
+                    >
+                        <Switch>
+                            <Route
+                                exact={true}
+                                path={urljoin(this.props.match.url, "chat")}
+                                component={Messages}
+                            />
+                            <Route
+                                exact={true}
+                                path={urljoin(this.props.match.url, "rating")}
+                                component={Rating}
+                            />
+                        </Switch>
+                    </div>
+                </Content>
+            </>
         );
     }
 }

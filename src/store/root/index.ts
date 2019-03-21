@@ -1,15 +1,14 @@
 import { combineReducers, ReducersMapObject } from "redux";
-// import { reducer as formReducer } from "redux-form";
 import { all } from "redux-saga/effects";
 import { messagesReducer } from "./messages/reducer";
+import { messagesSagas } from "./messages/sagas";
 
-// export function* rootSaga() {
-//     yield all([languageSagas()]);
-// }
+export function* rootSaga() {
+    yield all([messagesSagas()]);
+}
 
 export const createRootReducer = (reducersToCombine: ReducersMapObject) =>
     combineReducers({
-        // form: formReducer,
         messages: messagesReducer,
         ...reducersToCombine,
     });
