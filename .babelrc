@@ -1,0 +1,36 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["last 1 version", "> 0.2%"]
+        },
+        "useBuiltIns": "entry"
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "lib", // default: lib
+        "style": true
+      }
+    ],
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-object-rest-spread",
+    [
+      "babel-plugin-styled-components",
+      {
+        "displayName": true,
+        "fileName": false,
+        "ssr": true
+      }
+    ],
+    "babel-plugin-lodash"
+  ]
+}
