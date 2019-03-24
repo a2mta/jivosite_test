@@ -20,18 +20,16 @@ export class MenuItems extends React.Component<IProps, {}> {
         {
             text: "Чат",
             path: "chat",
-            icon: "folder",
+            icon: "folder"
         },
         {
             text: "Рейтинг",
             path: "rating",
-            icon: "user",
-        },
+            icon: "user"
+        }
     ];
 
     public render() {
-        console.warn(this.props.location)
-
         return (
             <React.Fragment>
                 <Menu
@@ -52,12 +50,9 @@ export class MenuItems extends React.Component<IProps, {}> {
                 <Menu.Item
                     key={`/${
                         this.props.location.pathname.includes(mi.path)
-                            ? _.trimStart(
-                                this.props.location.pathname,
-                                "/",
-                            )
+                            ? _.trimStart(this.props.location.pathname, "/")
                             : mi.path
-                        }`}
+                    }`}
                 >
                     <NavLink to={`/${mi.path}`}>
                         <Icon type={mi.icon} />
@@ -65,6 +60,6 @@ export class MenuItems extends React.Component<IProps, {}> {
                     </NavLink>
                 </Menu.Item>
             );
-        })
+        });
     };
 }

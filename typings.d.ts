@@ -1,7 +1,11 @@
 import { ConfigProps, FormData } from "redux-form";
 import { MapStateToPropsParam, MapDispatchToPropsParam } from "react-redux";
 
-
+export declare module "redux-form" {
+    function reduxForm<FormData = {}, P = {}>(
+        config: ConfigProps<FormData, P>
+    ): FormDecorator<FormData, P, Partial<ConfigProps<FormData, P>>>;
+}
 
 declare global {
     const __ENVIRONMENT__: {
@@ -9,9 +13,7 @@ declare global {
         testing: boolean;
         development: boolean;
     };
-    export namespace React {
-
-    }
+    export namespace React {}
     declare module "*.png" {
         const value: string;
         export default value;

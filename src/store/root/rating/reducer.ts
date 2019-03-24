@@ -1,26 +1,34 @@
 import * as _ from "lodash";
 import { handleActions } from "redux-actions";
 import { INCREASE } from "./actions";
+import { Action } from "../index";
 
-export interface IMessage {
+export interface IRating {
     name: string;
-    message: string;
+    rating: number;
 }
 
-export interface IMessagesState {
-    list: IMessage[];
+export interface IRatingState {
+    list: IRating[];
 }
 
-const defaultState: IMessagesState = { list: [{ name: "Name", message: "Message" }, { name: "Name2", message: "Message2" }] };
+const defaultState: IRatingState = {
+    list: [{ name: "TEST_USER", rating: 0 }, { name: "Name2", rating: 0 }]
+};
 
-export const messagesReducer = handleActions(
+export const ratingReducer = handleActions(
     {
-        [INCREASE]: (state, action) => {
+        [INCREASE]: (state, action: Action<IRating>) => {
             return {
                 ...state,
-                list: [...state.list, { name: "NAME", message: action.payload || "" } as IMessage],
-            }
-        },
+                list: state.list.map((item: IRating) => {
+                    console.warn(action);
+                    return item.name === action.payload.name
+                        ? { ...item, rating: item.rating + 1 }
+                        : item;
+                })
+            } as IRatingState;
+        }
     },
-    defaultState,
+    defaultState
 );

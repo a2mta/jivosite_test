@@ -1,11 +1,9 @@
-
 import { compose } from "redux";
-import { Chat } from "./chat"
+import { Chat } from "./chat";
 import { Route, Switch, withRouter } from "react-router";
 import { connect, Provider } from "react-redux";
 import urljoin from "url-join";
 import Layout from "antd/lib/layout";
-
 
 interface IProps {
     store: any;
@@ -14,15 +12,12 @@ interface IProps {
 export class Root extends React.Component<IProps, {}> {
     private routes = compose(
         withRouter,
-        connect(),
+        connect()
     )(({ match }: any) => {
         return (
             <Layout>
-                <Switch >
-                    <Route
-                        path={urljoin(match.url)}
-                        component={Chat}
-                    />
+                <Switch key={2}>
+                    <Route path={urljoin(match.url)} component={Chat} />
                 </Switch>
             </Layout>
         );
@@ -35,5 +30,5 @@ export class Root extends React.Component<IProps, {}> {
             </Provider>
         );
     }
-
 }
+
