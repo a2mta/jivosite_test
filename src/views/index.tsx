@@ -1,23 +1,22 @@
+import { ReduxStoreCreator } from "store";
 import { compose } from "redux";
-import { Route, Switch, withRouter, RouteComponentProps } from "react-router";
+import { Route, Switch, withRouter, } from "react-router";
 import { accountSelectors } from "store/root/account/selectors";
 import { connect, Provider } from "react-redux";
 import urljoin from "url-join";
 import Layout from "antd/lib/layout";
 import { Login } from "./login";
+import { Loadable } from "common-components/loadable"
 import { HeaderMenu } from "./header";
 const Messages = React.lazy(() => import('./messages'));
 const Rating = React.lazy(() => import('./rating'));
 
-import { Loadable } from "common-components/loadable"
-
+const preloadedState: any = ReduxStoreCreator.getPreloadedState();
+const store = ReduxStoreCreator.createStore(preloadedState, true);
 const { Content } = Layout;
 
-interface IProps extends RouteComponentProps<{}> {
-    store: any;
-}
 
-export class Root extends React.Component<IProps, {}> {
+export class Root extends React.Component<{}, {}> {
     private routes = compose(
         withRouter,
         connect(state => ({
@@ -67,7 +66,7 @@ export class Root extends React.Component<IProps, {}> {
 
     public render(): JSX.Element {
         return (
-            <Provider store={this.props.store}>
+            <Provider store={store}>
                 <this.routes />
             </Provider>
         );

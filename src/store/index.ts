@@ -11,7 +11,6 @@ if (!__ENVIRONMENT__.production && typeof window !== "undefined") {
     composeEnhancers = compose;
 }
 
-// const composeEnhancers = compose;
 class ReduxStoreCreatorClass {
     private store: any;
     public createStore = (initialState = {}, save = false) => {
