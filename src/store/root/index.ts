@@ -5,6 +5,7 @@ import { messagesReducer } from "./messages/reducer";
 import { ratingReducer } from "./rating/reducer";
 import { accountReducer } from "./account/reducer";
 import { messagesSagas } from "./messages/sagas";
+import { accountSagas } from "./account/sagas";
 
 export interface Action<T> {
     type: string;
@@ -14,7 +15,7 @@ export interface Action<T> {
 }
 
 export function* rootSaga() {
-    yield all([messagesSagas()]);
+    yield all([messagesSagas(), accountSagas()]);
 }
 
 export const createRootReducer = (reducersToCombine: ReducersMapObject) =>

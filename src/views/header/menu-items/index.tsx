@@ -20,12 +20,12 @@ export class MenuItems extends React.Component<IProps, {}> {
         {
             text: "Чат",
             path: "chat",
-            icon: "folder"
+            icon: "message"
         },
         {
             text: "Рейтинг",
             path: "rating",
-            icon: "user"
+            icon: "rise"
         }
     ];
 
@@ -52,7 +52,7 @@ export class MenuItems extends React.Component<IProps, {}> {
                         this.props.location.pathname.includes(mi.path)
                             ? _.trimStart(this.props.location.pathname, "/")
                             : mi.path
-                    }`}
+                        }`}
                 >
                     <NavLink to={`/${mi.path}`}>
                         <Icon type={mi.icon} />

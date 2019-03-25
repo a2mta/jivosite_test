@@ -1,12 +1,12 @@
 import { createSelector } from "reselect";
-import { IMessagesState } from "store/root/messages/reducer";
+import { IRatingState } from "store/root/rating/reducer";
 
-const getMessagesRoot = (state: any) => state.messages as IMessagesState;
+const getRatingRoot = (state: any) => state.rating as IRatingState;
 
-const getMessages = createSelector(getMessagesRoot, root =>
+const getRatingList = createSelector(getRatingRoot, root =>
     root.list,
 );
 
-export const messagesSelectors = {
-    getMessages,
+export const ratingSelectors = {
+    getRatingList,
 };

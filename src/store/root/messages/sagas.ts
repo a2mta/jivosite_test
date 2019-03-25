@@ -6,10 +6,9 @@ import { Action } from "../index";
 
 function* onMessageAdd(action: Action<IRating>) {
     yield put({ type: INCREASE, payload: action.payload });
-
     yield true;
 }
 
-export const messagesSagas = function*() {
+export const messagesSagas = function* () {
     yield all([takeLatest(ADD, onMessageAdd)]);
 };

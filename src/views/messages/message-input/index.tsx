@@ -1,20 +1,24 @@
 import { connect } from "react-redux";
-import { compose, Dispatch } from "redux";
-import { Form, Field, InjectedFormProps, reduxForm } from "redux-form";
 import { withRouter } from "react-router-dom";
-import Icon from "antd/lib/icon";
+import { compose } from "redux";
+import { Form, Field, InjectedFormProps, reduxForm } from "redux-form";
 import Button from "antd/lib/button";
 import { ReduxFormHelper } from "services/redux-form-helper";
 import { CompositInput } from "common-components/composit-input";
-import { AccountActionCreators } from "store/root/account/actions";
+import { MessagesActionCreators } from "store/root/messages/actions";
+import { accountSelectors } from "store/root/account/selectors";
+import { IAccount } from "store/root/account/reducer";
+import { IMessage } from "store/root/messages/reducer";
+
 
 interface IProps extends InjectedFormProps {
     form: any;
-    dispatch: Dispatch<{ type: any }>;
+    dispatch?: any;
+    account: IAccount;
 }
 
-@reduxForm({ form: "LoginForm" })
-class LoginFormClass extends React.PureComponent<IProps, {}> {
+@reduxForm({ form: "MessageForm" })
+class MessageInputClass extends React.PureComponent<IProps, {}> {
     public render(): JSX.Element {
         return (
             <Form
@@ -23,19 +27,13 @@ class LoginFormClass extends React.PureComponent<IProps, {}> {
                 noValidate={true}
             >
                 <Field
-                    name="login"
+                    name="message"
                     type="text"
                     component={CompositInput as any}
-                    prefix={
-                        <Icon
-                            type="user"
-                            style={{ color: "rgba(0,0,0,.25)" }}
-                        />
-                    }
                     validate={[ReduxFormHelper.validators.required]}
                     normalize={ReduxFormHelper.normalizers.trim}
-                    label="Логин"
-                    placeholder="Логин"
+                    label="Сообщение"
+                    placeholder="Сообщение"
                     autoComplete="on"
                 />
                 <Button
@@ -45,21 +43,25 @@ class LoginFormClass extends React.PureComponent<IProps, {}> {
                     className="login-form-button"
                     style={{ marginTop: 10 }}
                 >
-                    Войти
+                    Отправить
                 </Button>
             </Form>
         );
     }
-
-    private onSubmit = async ({ login }: any) => {
-        console.warn(login);
-        this.props.dispatch(AccountActionCreators.signInAccount(login));
+    private onSubmit = async ({ message }: any) => {
+        this.props.dispatch(
+            MessagesActionCreators.addMessage({ message, userName: this.props.account.userName } as IMessage)
+        );
+        this.props.reset();
     };
 }
-export const LoginForm = compose(
+
+export const MessageInput = compose(
     withRouter,
     connect(
-        state => ({}),
+        state => ({
+            account: accountSelectors.getAccount(state)
+        }),
         dispatch => ({ dispatch })
     )
-)(LoginFormClass) as any;
+)(MessageInputClass) as any;

@@ -4,7 +4,7 @@ import { ADD } from "./actions";
 import { Action } from "../index";
 
 export type IMessage = {
-    name: string;
+    userName: string;
     message: string;
 };
 
@@ -14,8 +14,8 @@ export interface IMessagesState {
 
 const defaultState: IMessagesState = {
     list: [
-        { name: "Name", message: "Message" },
-        { name: "Name2", message: "Message2" }
+        { userName: "Name", message: "Message" },
+        { userName: "Name2", message: "Message2" }
     ]
 };
 
@@ -26,7 +26,7 @@ export const messagesReducer = handleActions(
             list: [
                 ...state.list,
                 {
-                    name: action.payload.name,
+                    userName: action.payload.userName,
                     message: action.payload.message
                 }
             ]

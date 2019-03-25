@@ -11,13 +11,13 @@ interface IProps {
     messageList: IMessage[];
 }
 
-export class MessagesListClass extends React.PureComponent<IProps, {}> {
+class MessagesListClass extends React.PureComponent<IProps, {}> {
     public render(): JSX.Element {
         return (
             <div style={{ height: 400, overflow: "auto" }}>
                 <List dataSource={this.props.messageList} renderItem={(item: IMessage) => (<List.Item>
                     <List.Item.Meta
-                        title={item.name}
+                        title={item.userName}
                         description={item.message}
                     />
                 </List.Item>)} />

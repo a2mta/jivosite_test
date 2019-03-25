@@ -16,7 +16,7 @@ export class Login extends React.PureComponent<{}, {}> {
                         flexDirection: "column"
                     }}
                 >
-                    <h1 className="text">Vault</h1>
+                    <h1 className="text">CHAT</h1>
                     <LoginForm />
                 </Row>
             </Content>

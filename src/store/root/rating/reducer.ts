@@ -1,10 +1,10 @@
 import * as _ from "lodash";
 import { handleActions } from "redux-actions";
-import { INCREASE } from "./actions";
+import { INCREASE, CREATE } from "./actions";
 import { Action } from "../index";
 
 export interface IRating {
-    name: string;
+    userName: string;
     rating: number;
 }
 
@@ -13,7 +13,7 @@ export interface IRatingState {
 }
 
 const defaultState: IRatingState = {
-    list: [{ name: "TEST_USER", rating: 0 }, { name: "Name2", rating: 0 }]
+    list: [{ userName: "TEST_USER", rating: 0 }, { userName: "Name2", rating: 0 }]
 };
 
 export const ratingReducer = handleActions(
@@ -22,11 +22,22 @@ export const ratingReducer = handleActions(
             return {
                 ...state,
                 list: state.list.map((item: IRating) => {
-                    console.warn(action);
-                    return item.name === action.payload.name
+                    return item.userName === action.payload.userName
                         ? { ...item, rating: item.rating + 1 }
                         : item;
                 })
+            } as IRatingState;
+        },
+        [CREATE]: (state, action: Action<IRating>) => {
+            return {
+                ...state,
+                list: [
+                    ...state.list,
+                    {
+                        userName: action.payload.userName,
+                        rating: 0
+                    }
+                ]
             } as IRatingState;
         }
     },
